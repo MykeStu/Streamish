@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { addVideo } from "../modules/videoManager"
+import { useNavigate } from "react-router";
 
 const VideoForm = () => {
     const [newVideo, updateNewVideo] = useState({
@@ -9,6 +10,7 @@ const VideoForm = () => {
         Url: ""
     });
 
+    const navigate = useNavigate();
 
     const newVideoButton = (event) => {
         event.preventDefault();
@@ -20,7 +22,9 @@ const VideoForm = () => {
             UserProfileId: Math.floor(Math.random(1, 5))
         };
 
-        addVideo(nV);
+        addVideo(nV).then((p) => {
+            navigate("/");
+        });
     }
 
     return (
